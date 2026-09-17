@@ -1,0 +1,83 @@
+# Configuracao do experimento — Lab02
+# Registro das decisoes do desenho. A escala de contrabalanceamento que o codigo usa
+# de verdade esta em src/domain/services/trial_protocol.py; este arquivo documenta o
+# experimento para quem for replicar.
+
+experimento:
+  nome: Assistentes de IA vs. codificacao manual
+  desenho: crossover within-subject contrabalanceado
+  time_box_segundos: 2100  # 35 min, maximo permitido pelo enunciado
+  medicoes: 12  # 2 participantes x 6 katas
+
+participantes:
+  - id: yan
+    nome: Yan Araujo Resende
+  - id: felipe
+    nome: Felipe Vieira
+
+tratamentos:
+  - id: AI
+    descricao: GitHub Copilot habilitado, sem nenhuma outra consulta externa
+  - id: MANUAL
+    descricao: Copilot desabilitado na extensao, sem nenhuma consulta externa
+
+ambiente:
+  linguagem: Python 3.14.3
+  assistente: GitHub Copilot (versao estudante)
+  ide: null  # preencher com a IDE usada nos trials
+
+katas:
+  - id: k1
+    nome: Connect Four - placing tokens
+    url: https://www.codewars.com/kata/connect-four-placing-tokens
+    kyu: 6
+    testes_total: null  # preencher ao preparar o kata
+  - id: k2
+    nome: Exclamation marks series #17
+    url: https://www.codewars.com/kata/57fb44a12b53146fe1000136
+    kyu: 6
+    testes_total: 5
+  - id: k3
+    nome: If you can read this...
+    url: https://www.codewars.com/kata/586538146b56991861000293
+    kyu: 6
+    testes_total: null
+  - id: k4
+    nome: Kebabize
+    url: https://www.codewars.com/kata/57f8ff867a28db569e000c4a
+    kyu: 6
+    testes_total: 5
+  - id: k5
+    nome: Buying a car
+    url: https://www.codewars.com/kata/554a44516729e4d80b000012
+    kyu: 6
+    testes_total: null
+  - id: k6
+    nome: The Vowel Code
+    url: https://www.codewars.com/kata/53697be005f803751e0015aa
+    kyu: 6
+    testes_total: 4
+
+metricas:
+  rq1_tempo:
+    primaria: time-to-green em segundos
+    censura: trial sem sucesso entra censurado em 2100s, nunca descartado
+    agregacao: mediana e IQR por tratamento
+  rq2_defeitos:
+    primaria: taxa de sucesso (testes passando / testes totais ao fim do time-box)
+    complementar: numero absoluto de testes falhando
+  rq3_estrutura:
+    primaria: complexidade ciclomatica media por funcao (radon cc)
+    duplicacao: percentual de linhas duplicadas (jscpd, min-tokens 20)
+    controle: LOC (radon raw) — obrigatoria sempre que se reporta complexidade ou duplicacao
+    aprofundamento: indice de manutenibilidade (radon mi)
+
+analise:
+  teste_inferencial: Wilcoxon pareado (amostras dependentes, desenho within-subject)
+  descritivas: mediana e IQR
+
+dados:
+  brutos: data/raw/trials_<participante>.csv
+  codigo_dos_trials: data/raw/<participante>/<ordem>_<kata>_<tratamento>.py
+  consolidado: data/processed/trials.csv
+  metricas: data/processed/metrics.csv

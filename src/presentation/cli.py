@@ -13,12 +13,15 @@ import shutil
 import sys
 from pathlib import Path
 
+from ..application.use_cases.collect_static_metrics import CollectStaticMetrics
 from ..application.use_cases.export_experiment_data import ExportExperimentData
 from ..application.use_cases.record_trial import RecordTrial
 from ..application.use_cases.run_trial import RunTrial
 from ..domain.entities.treatment import Treatment
 from ..domain.services.measurement_policy import TIME_BOX_SEGUNDOS
 from ..domain.services import trial_protocol
+from ..infrastructure.metrics.duplication_adapter import JscpdDuplicationAdapter
+from ..infrastructure.persistence.metrics_repository import CsvMetricsRepository
 from ..infrastructure.persistence.trial_repository import CsvTrialRepository
 from ..infrastructure.testing.acceptance_test_runner import AcceptanceTestRunner, TestOutcome
 
@@ -160,6 +163,24 @@ def comando_export(args: argparse.Namespace) -> int:
 	return 0
 
 
+def comando_metricas(args: argparse.Namespace) -> int:
+	if not JscpdDuplicationAdapter.disponivel():
+		print("Aviso: jscpd nao encontrado, a coluna de duplicacao vai sair vazia.")
+		print("Para instalar: npm install -g jscpd\n")
+
+	resultado = CollectStaticMetrics(
+		trials=CsvTrialRepository(PASTA_RAW),
+		metricas=CsvMetricsRepository(PASTA_PROCESSED / "metrics.csv"),
+		raiz_projeto=RAIZ,
+	).execute()
+
+	print(f"{resultado.analisados} trials analisados.")
+	for problema in resultado.com_problema:
+		print(f"  - {problema}")
+	print(f"Metricas em: {resultado.destino}")
+	return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
 	parser = argparse.ArgumentParser(prog="cli", description="Coleta de dados do Lab02.")
 	sub = parser.add_subparsers(dest="comando", required=True)
@@ -181,6 +202,9 @@ def build_parser() -> argparse.ArgumentParser:
 
 	export = sub.add_parser("export", help="junta os CSVs dos participantes num dataset unico")
 	export.set_defaults(func=comando_export)
+
+	metricas = sub.add_parser("metricas", help="roda Radon e jscpd sobre o codigo final dos trials")
+	metricas.set_defaults(func=comando_metricas)
 
 	return parser
 
