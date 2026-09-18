@@ -13,5 +13,4 @@
 - **Dados:** arquivos brutos em `data/raw`, processados em `data/processed` e
 	relatórios em `data/reports`.
 - **Configuração:** `config/experiment.yaml`, `.env` e `.env.example`.
-- **Familiaridade prévia com o Copilot:** Yan — _(preencher)_; Felipe — _(preencher)_.
-	Registrar antes do primeiro trial, é ameaça à validade prevista no desenho.
+- **Familiaridade prévia com o Copilot:** Yan - Um ano, e uso diario; Felipe - Um ano e meio, com uso quase diario.
