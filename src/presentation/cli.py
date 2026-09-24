@@ -13,6 +13,7 @@ import shutil
 import sys
 from pathlib import Path
 
+from ..application.use_cases.analyze_time_and_defects import AnalyzeTimeAndDefects
 from ..application.use_cases.collect_static_metrics import CollectStaticMetrics
 from ..application.use_cases.export_experiment_data import ExportExperimentData
 from ..application.use_cases.record_trial import RecordTrial
@@ -181,6 +182,31 @@ def comando_metricas(args: argparse.Namespace) -> int:
 	return 0
 
 
+def comando_analise(args: argparse.Namespace) -> int:
+	resultado = AnalyzeTimeAndDefects(
+		trials=CsvTrialRepository(PASTA_RAW),
+		pasta_relatorios=RAIZ / "data" / "reports",
+	).execute()
+
+	if resultado.katas_incompletos:
+		print(f"Katas sem os dois tratamentos, fora da analise: {', '.join(resultado.katas_incompletos)}")
+
+	for analise in (resultado.tempo, resultado.defeitos):
+		teste = analise.teste
+		if teste is None:
+			motivo = "todas as diferencas deram zero" if analise.pares else "sem pares completos"
+			print(f"{analise.rq}: teste nao se aplica ({motivo}).")
+			continue
+		print(
+			f"{analise.rq}: mediana com IA {analise.mediana_ai:.2f} x manual "
+			f"{analise.mediana_manual:.2f} | W={teste.estatistica:g} p={teste.p_valor:.4f} "
+			f"(n={teste.n_usados}, menor p possivel {teste.menor_p_possivel:.4f})"
+		)
+
+	print(f"Relatorio em: {resultado.relatorio}")
+	return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
 	parser = argparse.ArgumentParser(prog="cli", description="Coleta de dados do Lab02.")
 	sub = parser.add_subparsers(dest="comando", required=True)
@@ -205,6 +231,9 @@ def build_parser() -> argparse.ArgumentParser:
 
 	metricas = sub.add_parser("metricas", help="roda Radon e jscpd sobre o codigo final dos trials")
 	metricas.set_defaults(func=comando_metricas)
+
+	analise = sub.add_parser("analise", help="Wilcoxon pareado das RQ1 e RQ2 (tempo e defeitos)")
+	analise.set_defaults(func=comando_analise)
 
 	return parser
 

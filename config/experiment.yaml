@@ -24,7 +24,7 @@ tratamentos:
 ambiente:
   linguagem: Python 3.14.3
   assistente: GitHub Copilot (versao estudante)
-  ide: null  # preencher com a IDE usada nos trials
+  ide: Visual Studio Code  # mesma IDE nos 12 trials, para os dois participantes
 
 katas:
   - id: k1

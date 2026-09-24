@@ -1,0 +1,7 @@
+participante,ordem,kata_id,kata_nome,tratamento,inicio,tempo_segundos,censurado,testes_total,testes_passando,arquivo_solucao,observacoes
+yan,1,k1,Connect Four - placing tokens,AI,2026-09-23,33.0,false,2,2,data/raw/yan/01_k1_ai.py,"sequencia iniciada as 14:00, katas resolvidos em ordem, um por vez;"
+yan,2,k2,Exclamation marks series #17,MANUAL,2026-09-23,680.0,false,5,5,data/raw/yan/02_k2_manual.py,"sequencia iniciada as 14:00, katas resolvidos em ordem, um por vez;"
+yan,3,k3,If you can read this...,AI,2026-09-23,41.0,false,3,3,data/raw/yan/03_k3_ai.py,"sequencia iniciada as 14:00, katas resolvidos em ordem, um por vez;"
+yan,4,k4,Kebabize,MANUAL,2026-09-23,784.0,false,5,5,data/raw/yan/04_k4_manual.py,"sequencia iniciada as 14:00, katas resolvidos em ordem, um por vez;"
+yan,5,k5,Buying a car,AI,2026-09-23,39.0,false,5,5,data/raw/yan/05_k5_ai.py,"sequencia iniciada as 14:00, katas resolvidos em ordem, um por vez;"
+yan,6,k6,The Vowel Code,MANUAL,2026-09-23,777.0,false,4,4,data/raw/yan/06_k6_manual.py,"sequencia iniciada as 14:00, katas resolvidos em ordem, um por vez;"
