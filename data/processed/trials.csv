@@ -1,0 +1,13 @@
+participante,ordem,kata_id,kata_nome,tratamento,inicio,tempo_segundos,censurado,testes_total,testes_passando,arquivo_solucao,observacoes,taxa_sucesso,testes_falhando
+felipe,1,k1,Connect Four - placing tokens,MANUAL,2026-09-24T16:00:00,1380.0,false,2,2,data/raw/felipe/01_k1_manual.py,,1.0000,0
+felipe,2,k2,Exclamation marks series #17,AI,2026-09-24T20:58:11,12.0,false,5,5,data/raw/felipe/02_k2_ai.py,implementacao assistida por IA; duracao observada entre inicio tecnico e testes aprovados,1.0000,0
+felipe,3,k3,If you can read this...,MANUAL,2026-09-24T16:33:00,780.0,false,3,3,data/raw/felipe/03_k3_manual.py,,1.0000,0
+felipe,4,k4,Kebabize,AI,2026-09-24T21:00:16,10.0,false,5,5,data/raw/felipe/04_k4_ai.py,implementacao assistida por IA; duracao observada entre inicio tecnico e testes aprovados,1.0000,0
+felipe,5,k5,Buying a car,MANUAL,2026-09-24T16:50:00,2100.0,true,5,0,data/raw/felipe/05_k5_manual.py,trial censurado: time-box de 35 minutos atingido; 0 de 5 testes passando,0.0000,5
+felipe,6,k6,The Vowel Code,AI,2026-09-24T21:01:18,6.0,false,4,4,data/raw/felipe/06_k6_ai.py,implementacao assistida por IA; duracao observada entre inicio tecnico e testes aprovados,1.0000,0
+yan,1,k1,Connect Four - placing tokens,AI,2026-09-23,33.0,false,2,2,data/raw/yan/01_k1_ai.py,"sequencia iniciada as 14:00, katas resolvidos em ordem, um por vez;",1.0000,0
+yan,2,k2,Exclamation marks series #17,MANUAL,2026-09-23,680.0,false,5,5,data/raw/yan/02_k2_manual.py,"sequencia iniciada as 14:00, katas resolvidos em ordem, um por vez;",1.0000,0
+yan,3,k3,If you can read this...,AI,2026-09-23,41.0,false,3,3,data/raw/yan/03_k3_ai.py,"sequencia iniciada as 14:00, katas resolvidos em ordem, um por vez;",1.0000,0
+yan,4,k4,Kebabize,MANUAL,2026-09-23,784.0,false,5,5,data/raw/yan/04_k4_manual.py,"sequencia iniciada as 14:00, katas resolvidos em ordem, um por vez;",1.0000,0
+yan,5,k5,Buying a car,AI,2026-09-23,39.0,false,5,5,data/raw/yan/05_k5_ai.py,"sequencia iniciada as 14:00, katas resolvidos em ordem, um por vez;",1.0000,0
+yan,6,k6,The Vowel Code,MANUAL,2026-09-23,777.0,false,4,4,data/raw/yan/06_k6_manual.py,"sequencia iniciada as 14:00, katas resolvidos em ordem, um por vez;",1.0000,0

@@ -1,4 +1,10 @@
 participante,ordem,kata_id,tratamento,arquivo,funcoes,cc_media,cc_max,loc,sloc,comentarios,mi,duplicacao_pct,linhas_duplicadas,observacao
+felipe,1,k1,MANUAL,data/raw/felipe/01_k1_manual.py,1,8.00,8,28,22,0,61.16,0.00,0,
+felipe,2,k2,AI,data/raw/felipe/02_k2_ai.py,1,5.00,5,11,9,0,70.66,0.00,0,
+felipe,3,k3,MANUAL,data/raw/felipe/03_k3_manual.py,1,4.00,4,30,24,0,66.45,0.00,0,
+felipe,4,k4,AI,data/raw/felipe/04_k4_ai.py,1,5.00,5,11,9,0,71.06,0.00,0,
+felipe,5,k5,MANUAL,data/raw/felipe/05_k5_manual.py,1,5.00,5,39,21,6,80.36,0.00,0,
+felipe,6,k6,AI,data/raw/felipe/06_k6_ai.py,2,2.00,2,8,6,0,100.00,0.00,0,
 yan,1,k1,AI,data/raw/yan/01_k1_ai.py,1,7.00,7,15,11,0,66.52,0.00,0,
 yan,2,k2,MANUAL,data/raw/yan/02_k2_manual.py,1,3.00,3,10,9,0,64.97,0.00,0,
 yan,3,k3,AI,data/raw/yan/03_k3_ai.py,1,4.00,4,23,19,0,66.83,0.00,0,

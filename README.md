@@ -146,6 +146,12 @@ Para instalar o jscpd, caso ainda não esteja disponível:
 npm install -g jscpd
 ```
 
+Para instalar as dependências do dashboard e das análises:
+
+```powershell
+python -m pip install -r requirements.txt
+```
+
 ## 6. Fluxo de execução dos trials
 
 Todos os comandos devem ser executados no terminal, a partir da raiz do projeto.
@@ -333,20 +339,13 @@ Comparar entre os tratamentos:
 
 A complexidade e a duplicação devem ser interpretadas junto com LOC, porque um código maior pode apresentar valores diferentes simplesmente por ter mais linhas.
 
-## 10. O que ainda falta concluir
+## 10. Estado atual da entrega
 
-A coleta automatizada já está estruturada, mas o trabalho ainda precisa de:
-
-1. executar os 12 trials;
-2. registrar a familiaridade prévia de Yan e Felipe com o Copilot em `Reports/decisions.md`;
-3. manter a mesma regra sobre visibilidade dos testes em todos os trials;
-4. revisar os arquivos gerados em `data/raw`;
-5. executar `export` e `metricas`;
-6. gerar tabelas e gráficos com Pandas, Matplotlib e Seaborn;
-7. aplicar as análises estatísticas;
-8. preencher os resultados por RQ em `Reports/final-report.md`;
-9. escrever a discussão final;
-10. inserir o link do repositório e do GitHub Projects, conforme solicitado pelo enunciado.
+Os 12 trials estão consolidados em `data/processed/trials.csv`. As métricas Radon e
+jscpd estão em `data/processed/metrics.csv`, as análises de RQ1/RQ2 em
+`data/reports/analise_rq1_rq2.md`, o relatório final em `Reports/final-report.md` e o
+dashboard em `src/presentation/dashboard.py`. A limitação metodológica dos trials de
+IA do Felipe está registrada no relatório final.
 
 ## 11. Comandos resumidos
 
@@ -377,6 +376,12 @@ python -m src.presentation.cli export
 
 # Calcular métricas estáticas
 python -m src.presentation.cli metricas
+
+# Gerar a análise de RQ1 e RQ2
+python -m src.presentation.cli analise
+
+# Abrir o dashboard
+python -m streamlit run src/presentation/dashboard.py
 ```
 
 ## 12. Estrutura principal de dados
