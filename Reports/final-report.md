@@ -8,6 +8,18 @@ Este trabalho realizou um experimento controlado para comparar o uso do GitHub C
 - **RQ2:** o uso de IA reduz os defeitos remanescentes?
 - **RQ3:** o uso de IA altera complexidade, tamanho, manutenibilidade ou duplicação?
 
+### Hipóteses
+
+Para cada questão, a hipótese nula afirma que não há diferença entre os tratamentos, e é contra ela que os testes foram aplicados.
+
+| | Hipótese nula (H₀) | Hipótese alternativa (H₁) |
+|---|---|---|
+| RQ1 | Não há diferença na mediana do tempo até passar em todos os testes entre os trials com IA e sem IA. | Os trials com IA apresentam mediana de tempo menor. |
+| RQ2 | Não há diferença na taxa de sucesso mediana ao final do time-box entre os dois tratamentos. | Os trials com IA apresentam taxa de sucesso mediana maior, ou seja, menos defeitos remanescentes. |
+| RQ3 | Não há diferença na complexidade ciclomática média entre o código produzido com e sem IA. | A complexidade ciclomática média difere entre os tratamentos, em qualquer direção. |
+
+A hipótese de RQ3 é não direcional de propósito: a literatura não é conclusiva sobre o sentido do efeito do uso de assistentes na estrutura do código, então o experimento se limita a verificar se existe diferença.
+
 ## 2. Metodologia
 
 Foi utilizado um desenho crossover contrabalanceado com dois participantes e seis katas. Cada kata aparece uma vez com IA e uma vez manualmente. O time-box foi de 35 minutos, ou 2100 segundos. Trials sem solução completa foram censurados em 2100 segundos.
@@ -33,11 +45,29 @@ Os códigos finais foram arquivados em `data/raw/<participante>` e os resultados
 
 ### Limitação do procedimento com IA
 
+O projeto oferece uma CLI (`run`) que cronometra o trial, executa os testes de aceitação ao final, arquiva o código e grava o registro automaticamente.
+
 Tentou-se isolar o ambiente por meio de um ambiente virtual e restringir a interação ao prompt, evitando consultas externas e tentando impedir que a IA simplesmente reproduzisse código pronto ou reconhecesse uma solução conhecida. Entretanto, neste contexto, usar a IA diretamente dentro da IDE não foi uma boa escolha metodológica: os trials `AI` do Felipe foram implementados e medidos como interações assistidas, e não conduzidos integralmente pelo fluxo `run` com a mesma separação operacional dos trials manuais. Por isso, os tempos de IA do Felipe devem ser interpretados como evidência exploratória, não como uma comparação perfeitamente controlada.
 
 ## 3. Resultados
 
 Os 12 trials foram consolidados. Houve um trial censurado: `k5` manual do Felipe, com 0 de 5 testes passando ao fim do time-box.
+
+### Revisão dos dados e outliers
+
+Os dados foram revisados pelo critério de 1,5 × IQR aplicado dentro de cada tratamento, separadamente para tempo e taxa de sucesso.
+
+| Métrica | Tratamento | Q1 | Q3 | IQR | Limites | Fora dos limites |
+|---|---|---:|---:|---:|---|---|
+| Tempo (s) | Com IA | 10,0 | 39,0 | 29,0 | até 82,5 | nenhum |
+| Tempo (s) | Manual | 777,0 | 1380,0 | 603,0 | até 2284,5 | nenhum |
+| Taxa de sucesso | Com IA | 1,00 | 1,00 | 0,00 | - | nenhum |
+| Taxa de sucesso | Manual | 1,00 | 1,00 | 0,00 | - | o 0% do `k5` |
+
+Nenhum outlier de tempo foi identificado. O trial censurado de 2100 s permanece dentro dos limites do grupo manual, porque a dispersão desse grupo é alta o bastante para acomodá-lo.
+
+Na taxa de sucesso, o único ponto sinalizado é o 0% do `k5` manual. Trata-se de artefato do critério: como cinco dos seis valores do grupo são idênticos a 100%, o IQR é zero e qualquer valor diferente é marcado. O ponto não é erro de medição, é o trial censurado, e o protocolo do experimento determina que trials censurados sejam mantidos e nunca descartados, sob pena de enviesar a comparação a favor do tratamento que falha mais.
+
 
 ### RQ1: tempo
 
@@ -81,7 +111,6 @@ Para RQ2, a quantidade reduzida de testes e o fato de quase todos os trials term
 - Familiaridade prévia diferente com o Copilot.
 - Possível memorização dos katas pelo assistente.
 - Testes visíveis no workspace.
-- Medição dos trials de IA do Felipe não reproduziu integralmente o fluxo operacional dos trials manuais.
 - Pareamento por kata, e não repetição do mesmo kata pelo mesmo participante nos dois tratamentos.
 - O jscpd não encontrou duplicação em códigos muito pequenos.
 
