@@ -12,7 +12,22 @@ Este trabalho realizou um experimento controlado para comparar o uso do GitHub C
 
 Foi utilizado um desenho crossover contrabalanceado com dois participantes e seis katas. Cada kata aparece uma vez com IA e uma vez manualmente. O time-box foi de 35 minutos, ou 2100 segundos. Trials sem solução completa foram censurados em 2100 segundos.
 
-O ambiente foi Visual Studio Code, Python 3.14.3 e GitHub Copilot na versão estudante. Os testes de aceitação foram executados pelo runner local do projeto. Os testes ficaram visíveis no workspace, condição mantida para os tratamentos.
+O ambiente foi Visual Studio Code, Python 3.14.3 e GitHub Copilot (licença GitHub Student Developer Pack), extensão GitHub Copilot Chat `github.copilot-chat` versão 0.48.1. Os testes de aceitação foram executados pelo runner local do projeto. Os testes ficaram visíveis no workspace, condição mantida para os tratamentos.
+
+### Katas utilizados
+
+Todos são katas 6 kyu do Codewars, resolvidos em Python. Foram escolhidos entre os de menor número de conclusões na plataforma, para reduzir o risco de memorização pelo assistente os clássicos mais populares, com centenas de milhares de conclusões, foram descartados por esse motivo.
+
+| Id | Kata | Testes de aceitação | Link |
+|---|---|---:|---|
+| k1 | Connect Four - placing tokens | 2 | https://www.codewars.com/kata/connect-four-placing-tokens |
+| k2 | Exclamation marks series #17 | 5 | https://www.codewars.com/kata/57fb44a12b53146fe1000136 |
+| k3 | If you can read this... | 3 | https://www.codewars.com/kata/586538146b56991861000293 |
+| k4 | Kebabize | 5 | https://www.codewars.com/kata/57f8ff867a28db569e000c4a |
+| k5 | Buying a car | 5 | https://www.codewars.com/kata/554a44516729e4d80b000012 |
+| k6 | The Vowel Code | 4 | https://www.codewars.com/kata/53697be005f803751e0015aa |
+
+A alocação de tratamento foi cruzada: cada kata foi resolvido com IA por um participante e manualmente pelo outro.
 
 Os códigos finais foram arquivados em `data/raw/<participante>` e os resultados foram consolidados em `data/processed/trials.csv`. As métricas estruturais foram coletadas com Radon e jscpd, usando `--min-tokens 20` para duplicação.
 
@@ -85,4 +100,8 @@ python -m src.presentation.cli analise
 streamlit run src/presentation/dashboard.py
 ```
 
-O dashboard apresenta filtros por participante e tratamento, gráficos de tempo, taxa de sucesso, falhas, LOC e complexidade, além da tabela de métricas estáticas. O código e os dados estão no repositório do projeto e o rastreamento dos trials está nas Issues `#19` a `#24`.
+O dashboard apresenta filtros por participante e tratamento, gráficos de tempo, taxa de sucesso, falhas, LOC e complexidade, além da tabela de métricas estáticas.
+
+**Repositório e GitHub Projects:** https://github.com/FelipeVieir4/lab02-medicao-experimentacao-software
+
+O código, os dados brutos e os artefatos gerados estão nesse repositório. O rastreamento dos trials está nas Issues `#14` a `#24`, e a análise da sprint 3 nas Issues `#25` a `#32`.
